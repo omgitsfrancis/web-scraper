@@ -13,7 +13,7 @@ import {
 const EmptyErrorState = {
   url: "",
   selector: "",
-}
+};
 
 function App() {
   const [url, setUrl] = useState("");
@@ -38,20 +38,20 @@ function App() {
 
   function handleUrlInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUrl(e.currentTarget.value);
-    setError({...error, url: ""})
+    setError({ ...error, url: "" });
   }
 
   function handleSelectorInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSelector(e.currentTarget.value);
-    setError({...error, selector: ""})
+    setError({ ...error, selector: "" });
   }
 
-  function handleButtonClick() {
+  function handleScrapeClick() {
     let errorFlag: Boolean = false;
     let errorReturn = {
       url: "",
       selector: "",
-    }
+    };
 
     if (selector.length === 0) {
       errorReturn.selector = "Please enter a valid CSS selector";
@@ -65,7 +65,7 @@ function App() {
 
     setError(errorReturn);
 
-    if (errorFlag){
+    if (errorFlag) {
       return;
     }
 
@@ -87,6 +87,13 @@ function App() {
       });
   }
 
+  function handleClearClick() {
+    setUrl("");
+    setSelector("");
+    setResults([]);
+    setError(EmptyErrorState);
+  }
+
   function handleFormatSelectChange(event: any, newValue: number) {
     setFormat(newValue);
   }
@@ -94,8 +101,8 @@ function App() {
   return (
     <Container maxWidth="md">
       <Grid container direction="column" justify="center" alignItems="center">
-        <h1 style={{margin: 0}}>Web Scraper</h1>
-        <p style={{marginTop: "0.25rem"}}>by @omgitsfrancis</p>
+        <h1 style={{ margin: 0 }}>Web Scraper</h1>
+        <p style={{ marginTop: "0.25rem" }}>by @omgitsfrancis</p>
         <Grid
           container
           direction="row"
@@ -105,9 +112,11 @@ function App() {
           <TextField
             variant="outlined"
             onChange={handleUrlInputChange}
+            value={url}
             label="Target URL"
             placeholder=" Example: https://djmag.com/top100djs"
             size="small"
+            disabled={fetching}
             error={error.url.length > 0}
             helperText={error.url.length > 0 ? error.url : " "}
             fullWidth
@@ -115,9 +124,11 @@ function App() {
           <TextField
             variant="outlined"
             onChange={handleSelectorInputChange}
+            value={selector}
             label="Selector"
             placeholder="Ex: .top100dj-name a"
             size="small"
+            disabled={fetching}
             error={error.selector.length > 0}
             helperText={error.selector.length > 0 ? error.selector : " "}
             style={{ marginRight: "1rem" }}
@@ -125,9 +136,19 @@ function App() {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleButtonClick}
+            disabled={fetching}
+            onClick={handleScrapeClick}
+            style={{ marginRight: "1rem" }}
           >
             Scrape
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            disabled={fetching}
+            onClick={handleClearClick}
+          >
+            Clear
           </Button>
         </Grid>
         <Tabs
