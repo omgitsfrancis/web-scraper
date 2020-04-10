@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon -e ts,json --exec npx ts-node server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "deploy:heroku": "cd .. && git subtree push --prefix api heroku master"
   },
   "author": "",
   "license": "ISC",
