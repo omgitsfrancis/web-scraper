@@ -45,9 +45,6 @@ app.post('/scrape', (req, res) => {
 //   })
 // })
 
-app.listen(err => {
-  if (err) {
-    return console.error(err);
-  }
-  return console.log(`server is listening on ${port}`);
+app.listen(port, () => {
+  console.log(`server is listening on ${port}`);
 });
