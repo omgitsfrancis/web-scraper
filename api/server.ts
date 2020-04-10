@@ -5,13 +5,13 @@ import { scrapeData } from './src/scrape';
 
 const cors = require('cors')
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.use(bodyParser.json())
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('HEllo world');
+  res.send('Welcome to web scraper API!');
 });
 
 // scrape
@@ -35,17 +35,17 @@ app.post('/scrape', (req, res) => {
   })
 })
 
-app.post('/html', (req, res) => {
-  let target = req.body.target;
+// app.post('/html', (req, res) => {
+//   let target = req.body.target;
 
-  axios.get(target).then(response => {
-    res.send(response.data)
-  }).catch(err => {
-    res.status(400).send('Invalid target url entered')
-  })
-})
+//   axios.get(target).then(response => {
+//     res.send(response.data)
+//   }).catch(err => {
+//     res.status(400).send('Invalid target url entered')
+//   })
+// })
 
-app.listen(port, err => {
+app.listen(err => {
   if (err) {
     return console.error(err);
   }
