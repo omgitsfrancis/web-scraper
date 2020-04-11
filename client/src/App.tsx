@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {
-  Button,
-  TextField,
-  Grid,
-  TextareaAutosize,
-  Container,
-  Tabs,
-  Tab,
-} from "@material-ui/core";
+import { Button, TextField, Grid, Container } from "@material-ui/core";
+import Results from "./components/Results";
 
 const EmptyErrorState = {
   url: "",
@@ -18,23 +11,9 @@ const EmptyErrorState = {
 function App() {
   const [url, setUrl] = useState("");
   const [selector, setSelector] = useState("");
-  const [format, setFormat] = useState(0); // Text
   const [results, setResults] = useState([]);
   const [fetching, setFetching] = useState(false);
   const [error, setError] = useState(EmptyErrorState);
-
-  function textAreaFormat(resultsArray: String[]) {
-    switch (format) {
-      case 0: // Text
-        return resultsArray.join("\n");
-      case 1: // Array
-        return `[${resultsArray.join(",\n")}]`;
-      case 2: // Number
-        return resultsArray.map((item, n) => `${n + 1}.\t${item}`).join("\n");
-      default:
-        return resultsArray.join("\n");
-    }
-  }
 
   function handleUrlInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUrl(e.currentTarget.value);
@@ -94,10 +73,6 @@ function App() {
     setError(EmptyErrorState);
   }
 
-  function handleFormatSelectChange(event: any, newValue: number) {
-    setFormat(newValue);
-  }
-
   return (
     <Container maxWidth="md">
       <Grid container direction="column" justify="center" alignItems="center">
@@ -149,24 +124,7 @@ function App() {
             Clear
           </Button>
         </Grid>
-        <Tabs
-          value={format}
-          onChange={handleFormatSelectChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
-          <Tab label="text" />
-          <Tab label="array" />
-          <Tab label="num" />
-        </Tabs>
-        <TextareaAutosize
-          placeholder={fetching ? "I am being fetched..." : "Results"}
-          value={textAreaFormat(results)}
-          rowsMin={10}
-          readOnly
-          style={{ width: "100%", resize: "none" }}
-        />
+        <Results results={results} fetching={fetching} />
       </Grid>
     </Container>
   );
