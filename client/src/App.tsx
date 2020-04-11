@@ -101,8 +101,6 @@ function App() {
   return (
     <Container maxWidth="md">
       <Grid container direction="column" justify="center" alignItems="center">
-        <h1 style={{ margin: 0 }}>Web Scraper</h1>
-        <p style={{ marginTop: "0.25rem" }}>by @omgitsfrancis</p>
         <Grid
           container
           direction="row"
