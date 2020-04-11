@@ -59,7 +59,7 @@ function App() {
         setResults(response.data);
       })
       .catch((err) => {
-        console.log(err);
+        setError({ ...error, url: "URL could not be reached" });
       })
       .finally(() => {
         setFetching(false);
