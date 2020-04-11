@@ -30,7 +30,7 @@ app.post('/scrape', (req, res) => {
 
   axios.get(target).then(response => {
     res.send(scrapeData(response.data, selector))
-  }).catch(err => {
+  }).catch(() => {
     res.status(400).send('Invalid target url entered')
   })
 })
