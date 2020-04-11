@@ -29,7 +29,7 @@ ReactDOM.render(
         <h2 style={{ margin: "0rem" }}>Web Scraper</h2>
         <span style={{ margin: "0.25rem" }}>
           by{" "}
-          <Link href="http://www.google.com" style={{ color: "inherit" }}>
+          <Link href="https://github.com/omgitsfrancis/" style={{ color: "inherit" }}>
             @omgitsfrancis
           </Link>
         </span>
