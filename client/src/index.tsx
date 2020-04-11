@@ -23,8 +23,7 @@ ReactDOM.render(
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          textAlign: "center",
-          marginBottom: "1rem",
+          textAlign: "center"
         }}
       >
         <h2 style={{ margin: "0rem" }}>Web Scraper</h2>

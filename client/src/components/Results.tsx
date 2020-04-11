@@ -13,7 +13,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 
 type ResultsProps = {
   results: string[];
-  fetching: Boolean;
+  fetching: boolean;
 };
 
 export default function Results({ results, fetching }: ResultsProps) {
@@ -136,6 +136,7 @@ export default function Results({ results, fetching }: ResultsProps) {
         </Popover>
       </div>
       <TextareaAutosize
+        disabled={fetching}
         placeholder={fetching ? "I am being fetched..." : "Results"}
         value={textAreaFormat(cleanResults(results))}
         rowsMin={10}

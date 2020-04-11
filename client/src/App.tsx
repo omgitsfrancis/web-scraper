@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, TextField, Grid, Container } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Grid,
+  Container,
+  LinearProgress,
+} from "@material-ui/core";
 import Results from "./components/Results";
 
 const EmptyErrorState = {
@@ -74,59 +80,67 @@ function App() {
   }
 
   return (
-    <Container maxWidth="md">
-      <Grid container direction="column" justify="center" alignItems="center">
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="flex-start"
-        >
-          <TextField
-            variant="outlined"
-            onChange={handleUrlInputChange}
-            value={url}
-            label="Target URL"
-            placeholder=" Example: https://djmag.com/top100djs"
-            size="small"
-            disabled={fetching}
-            error={error.url.length > 0}
-            helperText={error.url.length > 0 ? error.url : " "}
-            fullWidth
-          />
-          <TextField
-            variant="outlined"
-            onChange={handleSelectorInputChange}
-            value={selector}
-            label="Selector"
-            placeholder="Ex: .top100dj-name a"
-            size="small"
-            disabled={fetching}
-            error={error.selector.length > 0}
-            helperText={error.selector.length > 0 ? error.selector : " "}
-            style={{ marginRight: "1rem" }}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            disabled={fetching}
-            onClick={handleScrapeClick}
-            style={{ marginRight: "1rem" }}
+    <>
+      {fetching && (
+        <LinearProgress
+          color="secondary"
+          style={{ position: "absolute", width: "100%" }}
+        />
+      )}
+      <Container maxWidth="md" style={{ marginTop: "1.5rem" }}>
+        <Grid container direction="column" justify="center" alignItems="center">
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="flex-start"
           >
-            Scrape
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            disabled={fetching}
-            onClick={handleClearClick}
-          >
-            Clear
-          </Button>
+            <TextField
+              variant="outlined"
+              onChange={handleUrlInputChange}
+              value={url}
+              label="Target URL"
+              placeholder=" Example: https://djmag.com/top100djs"
+              size="small"
+              disabled={fetching}
+              error={error.url.length > 0}
+              helperText={error.url.length > 0 ? error.url : " "}
+              fullWidth
+            />
+            <TextField
+              variant="outlined"
+              onChange={handleSelectorInputChange}
+              value={selector}
+              label="Selector"
+              placeholder="Ex: .top100dj-name a"
+              size="small"
+              disabled={fetching}
+              error={error.selector.length > 0}
+              helperText={error.selector.length > 0 ? error.selector : " "}
+              style={{ marginRight: "1rem" }}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={fetching}
+              onClick={handleScrapeClick}
+              style={{ marginRight: "1rem" }}
+            >
+              Scrape
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              disabled={fetching}
+              onClick={handleClearClick}
+            >
+              Clear
+            </Button>
+          </Grid>
+          <Results results={results} fetching={fetching} />
         </Grid>
-        <Results results={results} fetching={fetching} />
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 }
 
