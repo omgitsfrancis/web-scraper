@@ -33,10 +33,11 @@ npm run start
 ## Usage
 Enter the URL of the page you want to scrape. Input the [CSS selector](https://www.w3schools.com/css/css_selectors.asp) of the element you want the innerText of. After that, click the scrape button and the results will populate in the TextArea below. 
 
-Example:
+#### Example 1: Text
 ```
 URL: "https://djmag.com/top100djs"
 Selector: ".top100dj-name a"
+Data to fetch: "text"
 Results:
 " Dimitri Vegas & Like Mike
   Martin Garrix
@@ -74,4 +75,26 @@ Numbered
 4.	Armin Van Buuren
 5.	Marshmello 
 ...
+```
+
+#### Example 2: Attribute
+```
+URL: "https://www.bing.com/search?q=github"
+Selector: "h2 > a"
+Attribute: "href"
+Data to fetch: "attribute"
+Results:
+" https://github.com/
+  https://en.wikipedia.org/wiki/GitHub
+  https://play.google.com/store/apps/details?id=com.github.android& hl=en_US
+  /news/search?q=GitHub&qpvt=github&FORM=EWRE
+  /news/search?q=GitHub&qpvt=github&FORM=EWRE
+  https://www.howtogeek.com/180167/ htg-explains-what-is-github-and-what-do-geeks-use-it-for/
+  https://help.github.com/en/github/getting-started-with-github
+  https://github.blog/
+  https://twitter.com/github
+  https://lab.github.com/
+  https://www.zhihu.com/question/20070065
+  /videos/search?q=github&qpvt=github&FORM=VDRE
+  ..."
 ```
