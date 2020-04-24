@@ -179,6 +179,7 @@ function App() {
                     label="Data"
                     value={dataType}
                     onChange={handleDataTypeChange}
+                    disabled={fetching}
                     style={{ width: "120px", marginRight: "1rem" }}
                   >
                     <MenuItem value="text">Text</MenuItem>
