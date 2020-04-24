@@ -1,9 +1,19 @@
-import cheerio from 'cheerio';
+import cheerio from "cheerio";
 
-export function scrapeData(html: String, selector: String) {
+export function scrape(
+  html: String,
+  selector: String,
+  attribute: String = ""
+) {
   const $ = cheerio.load(html);
 
-  return $(selector).map(function(){
-    return $(this).text()
-  }).toArray()
+  return $(selector)
+    .map(function () {
+      if (attribute.length > 0) {
+        return $(this).attr(attribute);
+      } else {
+        return $(this).text();
+      }
+    })
+    .toArray();
 }

@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 import bodyParser from 'body-parser';
-import { scrapeData } from './src/scrape';
+import { scrape } from './src/scrape';
 
 const cors = require('cors')
 const app = express();
@@ -14,14 +14,17 @@ app.get('/', (req, res) => {
   res.send('Welcome to web scraper API!');
 });
 
-// scrape
+// scrape:
 // body {
 //   target: website url,
-//   selector: css selector
+//   selector: css selector 
+//   attribute: html attribute to scrape (optional) 
+//              default is to scrape text
 // }
 app.post('/scrape', (req, res) => {
   let selector = req.body.selector;
   let target = req.body.target;
+  let attribute = req.body.attribute;
 
   if(selector == '' || selector == null) {
     res.status(400).send('Invalid selector entered')
@@ -29,21 +32,11 @@ app.post('/scrape', (req, res) => {
   } 
 
   axios.get(target).then(response => {
-    res.send(scrapeData(response.data, selector))
-  }).catch(() => {
+    res.send(scrape(response.data, selector, attribute))
+  }).catch((e) => {
     res.status(400).send('Invalid target url entered')
   })
 })
-
-// app.post('/html', (req, res) => {
-//   let target = req.body.target;
-
-//   axios.get(target).then(response => {
-//     res.send(response.data)
-//   }).catch(err => {
-//     res.status(400).send('Invalid target url entered')
-//   })
-// })
 
 app.listen(port, () => {
   console.log(`server is listening on ${port}`);
